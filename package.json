@@ -7,7 +7,7 @@
     "jest:cov": "jest --coverage",
     "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|scss|md)\"",
     "pytest": "python -m pytest",
-    "pytest:cov": "python -m pytest --cov --cov-report term --cov-config=.pytestcoveragerc"
+    "pytest:cov": "python -m pytest --cov=src --cov-report term --cov-config=.pytestcoveragerc"
   },
   "dependencies": {
     "@types/jest": "^25.1.2",
