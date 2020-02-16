@@ -1,0 +1,22 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "Algorithm implementation in javascript and python.",
+  "scripts": {
+    "jest": "jest ./src --watch",
+    "jest:cov": "jest ./src --coverage",
+    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|scss|md)\"",
+    "pytest": "pytest ./src",
+    "pytest:cov": "pytest ./src --cov --cov-report term --cov-config=.pytestcoveragerc"
+  },
+  "dependencies": {
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.1",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0"
+  }
+}
