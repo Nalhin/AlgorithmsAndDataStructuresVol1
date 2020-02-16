@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Algorithm implementation in javascript and python.",
   "scripts": {
-    "jest": "jest ./src --watch",
-    "jest:cov": "jest ./src --coverage",
+    "jest": "jest --watch",
+    "jest:cov": "jest --coverage",
     "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|scss|md)\"",
-    "pytest": "pytest ./src",
-    "pytest:cov": "pytest ./src --cov --cov-report term --cov-config=.pytestcoveragerc"
+    "pytest": "python -m pytest",
+    "pytest:cov": "python -m pytest --cov --cov-report term --cov-config=.pytestcoveragerc"
   },
   "dependencies": {
     "@types/jest": "^25.1.2",
