@@ -4,28 +4,48 @@ interface MaximumSubarray {
   sum: number;
 }
 
-export function maximumSubarrayDivideAndConquer(array: number[], startIndex = 0, endIndex = array.length - 1): MaximumSubarray {
+export function maximumSubarrayDivideAndConquer(array: number[]) {
+  const solution = maximumSubarrayRecursive(array, 0, array.length - 1);
+  return array.slice(solution.start, solution.end + 1);
+}
 
-  if (endIndex===startIndex) {
+function maximumSubarrayRecursive(
+  array: number[],
+  startIndex: number,
+  endIndex: number,
+): MaximumSubarray {
+  if (endIndex === startIndex) {
     return { start: startIndex, end: endIndex, sum: array[startIndex] };
   }
 
   const middleIndex = Math.floor((startIndex + endIndex) / 2);
 
-  const leftSubarray = maximumSubarrayDivideAndConquer(array, startIndex, middleIndex);
-  const rightSubarray = maximumSubarrayDivideAndConquer(array, middleIndex + 1, endIndex);
-  const middleSubarray = findMaximumCrossingSubarray(array, startIndex, middleIndex, endIndex);
+  const leftSubarray = maximumSubarrayRecursive(array, startIndex, middleIndex);
+  const rightSubarray = maximumSubarrayRecursive(
+    array,
+    middleIndex + 1,
+    endIndex,
+  );
+  const middleSubarray = findMaximumCrossingSubarray(
+    array,
+    startIndex,
+    middleIndex,
+    endIndex,
+  );
 
-  if (leftSubarray.sum >= rightSubarray.sum && leftSubarray.sum >= middleSubarray.sum) {
-    return leftSubarray;
-  }
-  if (rightSubarray.sum >= leftSubarray.sum && rightSubarray.sum >= middleSubarray.sum) {
-    return rightSubarray;
-  }
-  return middleSubarray;
+  return returnMaximumSubarray(leftSubarray, rightSubarray, middleSubarray);
 }
 
-function findMaximumCrossingSubarray(array: number[], startIndex: number, middleIndex: number, endIndex: number): MaximumSubarray {
+function returnMaximumSubarray(...subArrays) {
+  return subArrays.reduce((prev, curr) => (prev.sum > curr.sum ? prev : curr));
+}
+
+function findMaximumCrossingSubarray(
+  array: number[],
+  startIndex: number,
+  middleIndex: number,
+  endIndex: number,
+): MaximumSubarray {
   let leftSum = -Infinity;
   let sum = 0;
   let maxLeftIndex = 0;

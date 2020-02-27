@@ -3,7 +3,7 @@
  *
  * @param {number[]} array - sorted array.
  * @param {number} searchedValue - value whose position is being searched.
- * @returns {?number} Index of the first occurrence of searched value.
+ * @returns {?number} Index of the first occurrence of `searchedValue`.
  */
 export function binarySearch(array: number[], searchedValue: number) {
   let lower = 0;
