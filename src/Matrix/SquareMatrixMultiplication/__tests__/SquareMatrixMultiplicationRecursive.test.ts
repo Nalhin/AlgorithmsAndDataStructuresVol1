@@ -5,7 +5,7 @@ import {
 } from '../SquareMatrixMultiplicationRecursive';
 
 describe('SquareMatrixMultiplicationRecursive', () => {
-  describe('should combine four matrices', () => {
+  it('should combine four matrices', () => {
     const A = [
       [6, -2],
       [3, 7],

@@ -117,46 +117,36 @@ export function combineFourMatrices(
   lowerRight: number[][],
 ): number[][] {
   const length = upperLeft.length;
-  const C = [];
 
   for (let i = 0; i < length; i++) {
-    C[i] = [];
+    upperLeft[i + length] = [];
     for (let j = 0; j < length; j++) {
-      C[i][j] = upperLeft[i][j];
-    }
-  }
-
-  for (let i = 0; i < length; i++) {
-    C[i + length] = [];
-    for (let j = 0; j < length; j++) {
-      C[i + length][j] = lowerLeft[i][j];
+      upperLeft[i + length][j] = lowerLeft[i][j];
     }
   }
 
   for (let i = 0; i < length; i++) {
     for (let j = 0; j < length; j++) {
-      C[i][j + length] = upperRight[i][j];
+      upperLeft[i][j + length] = upperRight[i][j];
     }
   }
 
   for (let i = 0; i < length; i++) {
     for (let j = 0; j < length; j++) {
-      C[i + length][j + length] = lowerRight[i][j];
+      upperLeft[i + length][j + length] = lowerRight[i][j];
     }
   }
 
-  return C;
+  return upperLeft;
 }
 
 export function addMatrices(A: number[][], B: number[][]): number[][] {
   const length = A.length;
-  const C = [[]];
 
   for (let i = 0; i < length; i++) {
-    C[i] = [];
     for (let j = 0; j < length; j++) {
-      C[i][j] = A[i][j] + B[i][j];
+      A[i][j] += B[i][j];
     }
   }
-  return C;
+  return A;
 }
