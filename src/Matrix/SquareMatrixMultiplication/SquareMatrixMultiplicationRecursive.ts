@@ -1,8 +1,9 @@
 /**
  * Returns the product of two square matrices. Calculated with recursive algorithm.
  *
- * @param {number[][]} A - Matrix.
- * @param {number[][]} B - Matrix.
+ * @param {number[][]} A - square matrix with the same size as `B`.
+ * @param {number[][]} B - square matrix with the same size as `A`.
+ *
  * @returns {number[][]} The product of `A` and `B`.
  */
 
@@ -19,30 +20,41 @@ export function squareMatrixMultiplicationRecursive(
   );
 }
 
-interface MatrixRowsAndCols {
+interface MatrixSlicePositions {
   rows: number;
   cols: number;
 }
 
+/**
+ * Recursively splits matrices into smaller ones and calculates their product.
+ *
+ * @param {number[][]} A - first matrix
+ * @param {number[][]} B - second matrix
+ * @param firstMatrixSlice - first matrix slice options
+ * @param secondMatrixSlice - second matrix slice options
+ * @param {number} size - slice size
+ *
+ * @returns {number[][]} product of `A` and `B` slices.
+ */
 function multiplyRecursively(
   A: number[][],
   B: number[][],
-  aRowsAndCols: MatrixRowsAndCols,
-  bRowsAndCols: MatrixRowsAndCols,
+  firstMatrixSlice: MatrixSlicePositions,
+  secondMatrixSlice: MatrixSlicePositions,
   size: number,
 ): number[][] {
   if (size === 1) {
-    const C = [[]];
-
-    C[0][0] =
-      A[aRowsAndCols.rows][aRowsAndCols.cols] *
-      B[bRowsAndCols.rows][bRowsAndCols.cols];
-    return C;
+    return [
+      [
+        A[firstMatrixSlice.rows][firstMatrixSlice.cols] *
+          B[secondMatrixSlice.rows][secondMatrixSlice.cols],
+      ],
+    ];
   }
 
   const halfSize = size / 2;
 
-  const c11 = addMatrices(
+  const C11 = addMatrices(
     multiplyRecursively(
       A,
       B,
@@ -58,7 +70,7 @@ function multiplyRecursively(
       halfSize,
     ),
   );
-  const c12 = addMatrices(
+  const C12 = addMatrices(
     multiplyRecursively(
       A,
       B,
@@ -74,7 +86,7 @@ function multiplyRecursively(
       halfSize,
     ),
   );
-  const c21 = addMatrices(
+  const C21 = addMatrices(
     multiplyRecursively(
       A,
       B,
@@ -90,7 +102,7 @@ function multiplyRecursively(
       halfSize,
     ),
   );
-  const c22 = addMatrices(
+  const C22 = addMatrices(
     multiplyRecursively(
       A,
       B,
@@ -107,9 +119,19 @@ function multiplyRecursively(
     ),
   );
 
-  return combineFourMatrices(c11, c12, c21, c22);
+  return combineFourMatrices(C11, C12, C21, C22);
 }
 
+/**
+ * Combines four matrices in place.
+ *
+ * @param {number[][]} upperLeft - upper left matrix
+ * @param {number[][]} upperRight - upper right matrix
+ * @param {number[][]} lowerLeft - lower left matrix
+ * @param {number[][]} lowerRight - lower right matrix
+ *
+ * @returns {number[][]} Combined matrix of `A`, `B`, `C` and `D`.
+ */
 export function combineFourMatrices(
   upperLeft: number[][],
   upperRight: number[][],
@@ -139,6 +161,15 @@ export function combineFourMatrices(
 
   return upperLeft;
 }
+
+/**
+ * Adds two matrices in place.
+ *
+ * @param {number[][]} A
+ * @param {number[][]} B
+ *
+ * @returns {number[][]} Sum of `A` and `B`
+ */
 
 export function addMatrices(A: number[][], B: number[][]): number[][] {
   const length = A.length;

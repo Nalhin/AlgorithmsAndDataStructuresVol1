@@ -1,8 +1,9 @@
 /**
- * Returns the product of two square matrices. Calculated with recursive algorithm.
+ * Returns the product of two square matrices. Implemented with Strassen's algorithm.
  *
- * @param {number[][]} A - Matrix.
- * @param {number[][]} B - Matrix.
+ * @param {number[][]} A - square matrix with the same size as `B`.
+ * @param {number[][]} B - square matrix with the same size as `A`.
+ *
  * @returns {number[][]} The product of `A` and `B`.
  */
 
@@ -10,168 +11,219 @@ export function squareMatrixMultiplicationStrassen(
   A: number[][],
   B: number[][],
 ) {
-  return multiplyStrassen(
-    A,
-    B,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    A.length,
-  );
+  return multiplyStrassen(A, B, {
+    size: A.length,
+  });
 }
 
-interface MatrixRowsAndCols {
+interface MatrixSlicePositions {
   rows: number;
   cols: number;
 }
 
+interface MatrixOptions {
+  firstMatrixSlice?: MatrixSlicePositions;
+  secondMatrixSlice?: MatrixSlicePositions;
+}
+
+interface StrassenOptions extends MatrixOptions {
+  size: number;
+}
+
+/**
+ * Recursively splits matrices into smaller ones and calculates their product.
+ *
+ * @param {number[][]} A - first matrix
+ * @param {number[][]} B - second matrix
+ * @param firstMatrixSlice - first matrix slice options
+ * @param secondMatrixSlice - second matrix slice options
+ * @param {number} size - slice size
+ *
+ * @returns {number[][]} product of `A` and `B` slices.
+ */
 function multiplyStrassen(
   A: number[][],
   B: number[][],
-  aRowsAndCols: MatrixRowsAndCols,
-  bRowsAndCols: MatrixRowsAndCols,
-  size: number,
+  {
+    firstMatrixSlice = { rows: 0, cols: 0 },
+    secondMatrixSlice = { rows: 0, cols: 0 },
+    size,
+  }: StrassenOptions,
 ): number[][] {
   if (size === 1) {
-    const C = [[]];
-
-    C[0][0] =
-      A[aRowsAndCols.rows][aRowsAndCols.cols] *
-      B[bRowsAndCols.rows][bRowsAndCols.cols];
-    return C;
+    return [
+      [
+        A[firstMatrixSlice.rows][firstMatrixSlice.rows] *
+          B[secondMatrixSlice.rows][secondMatrixSlice.cols],
+      ],
+    ];
   }
 
   const halfSize = size / 2;
 
-  const s1 = subtractMatricesWithBounds(
-    B,
-    B,
-    { rows: 0, cols: halfSize },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const s2 = addMatricesWithBounds(
-    A,
-    A,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: halfSize },
-    halfSize,
-  );
-  const s3 = addMatricesWithBounds(
-    A,
-    A,
-    { rows: halfSize, cols: 0 },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
+  const s1 = subtractMatrices(B, B, {
+    firstMatrixSlice: { rows: 0, cols: halfSize },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const s2 = addMatrices(A, A, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    secondMatrixSlice: { rows: 0, cols: halfSize },
+    size: halfSize,
+  });
+  const s3 = addMatrices(A, A, {
+    firstMatrixSlice: { rows: halfSize, cols: 0 },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
 
-  const s4 = subtractMatricesWithBounds(
-    B,
-    B,
-    { rows: halfSize, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const s5 = addMatricesWithBounds(
-    A,
-    A,
-    { rows: 0, cols: 0 },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const s6 = addMatricesWithBounds(
-    B,
-    B,
-    { rows: 0, cols: 0 },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const s7 = subtractMatricesWithBounds(
-    A,
-    A,
-    { rows: 0, cols: halfSize },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const s8 = addMatricesWithBounds(
-    B,
-    B,
-    { rows: halfSize, cols: 0 },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const s9 = subtractMatricesWithBounds(
-    A,
-    A,
-    { rows: 0, cols: 0 },
-    { rows: halfSize, cols: 0 },
-    halfSize,
-  );
-  const s10 = addMatricesWithBounds(
-    B,
-    B,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: halfSize },
-    halfSize,
-  );
+  const s4 = subtractMatrices(B, B, {
+    firstMatrixSlice: { rows: halfSize, cols: 0 },
+    secondMatrixSlice: { rows: 0, cols: 0 },
+    size: halfSize,
+  });
+  const s5 = addMatrices(A, A, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const s6 = addMatrices(B, B, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const s7 = subtractMatrices(A, A, {
+    firstMatrixSlice: { rows: 0, cols: halfSize },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const s8 = addMatrices(B, B, {
+    firstMatrixSlice: { rows: halfSize, cols: 0 },
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const s9 = subtractMatrices(A, A, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    secondMatrixSlice: { rows: halfSize, cols: 0 },
+    size: halfSize,
+  });
+  const s10 = addMatrices(B, B, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    secondMatrixSlice: { rows: 0, cols: halfSize },
+    size: halfSize,
+  });
 
-  const p1 = multiplyStrassen(
-    A,
-    s1,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const p2 = multiplyStrassen(
-    s2,
-    B,
-    { rows: 0, cols: 0 },
-    { rows: halfSize, cols: halfSize },
-    halfSize,
-  );
-  const p3 = multiplyStrassen(
-    s3,
-    B,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const p4 = multiplyStrassen(
-    A,
-    s4,
-    { rows: halfSize, cols: halfSize },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const p5 = multiplyStrassen(
-    s5,
-    s6,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const p6 = multiplyStrassen(
-    s7,
-    s8,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
-  const p7 = multiplyStrassen(
-    s9,
-    s10,
-    { rows: 0, cols: 0 },
-    { rows: 0, cols: 0 },
-    halfSize,
-  );
+  const P1 = multiplyStrassen(A, s1, {
+    firstMatrixSlice: { rows: 0, cols: 0 },
+    size: halfSize,
+  });
+  const P2 = multiplyStrassen(s2, B, {
+    secondMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const P3 = multiplyStrassen(s3, B, {
+    secondMatrixSlice: { rows: 0, cols: 0 },
+    size: halfSize,
+  });
+  const P4 = multiplyStrassen(A, s4, {
+    firstMatrixSlice: { rows: halfSize, cols: halfSize },
+    size: halfSize,
+  });
+  const P5 = multiplyStrassen(s5, s6, {
+    size: halfSize,
+  });
+  const P6 = multiplyStrassen(s7, s8, {
+    size: halfSize,
+  });
+  const P7 = multiplyStrassen(s9, s10, { size: halfSize });
 
-  const c11 = addMatrices(subtractMatrices(p4, p2), addMatrices(p5, p6));
-  const c12 = addMatrices(p1, p2);
-  const c21 = addMatrices(p3, p4);
-  const c22 = subtractMatrices(addMatrices(p5, p1), addMatrices(p3, p7));
+  const C11 = addMatrices(subtractMatrices(P4, P2), addMatrices(P5, P6));
+  const C12 = addMatrices(P1, P2);
+  const C21 = addMatrices(P3, P4);
+  const C22 = subtractMatrices(addMatrices(P5, P1), addMatrices(P3, P7));
 
-  return combineFourMatrices(c11, c12, c21, c22);
+  return combineFourMatrices(C11, C12, C21, C22);
 }
 
+interface MatrixOperationOptions extends MatrixOptions {
+  size: number;
+}
+
+/**
+ * Immutably adds two matrices.
+ *
+ * @param {number[][]} A - first matrix
+ * @param {number[][]} B - second matrix
+ * @param {?MatrixOperationOptions} firstMatrixSlice - first matrix slice options
+ * @param {?MatrixOperationOptions} secondMatrixSlice - second matrix slice options
+ * @param {?number} size - slice size
+ *
+ * @returns {number[][]} sum of `A` and `B`.
+ */
+export function addMatrices(
+  A: number[][],
+  B: number[][],
+  {
+    firstMatrixSlice = { rows: 0, cols: 0 },
+    secondMatrixSlice = { rows: 0, cols: 0 },
+    size = A.length,
+  } = {} as MatrixOperationOptions,
+): number[][] {
+  const C = [];
+
+  for (let i = 0; i < size; i++) {
+    C[i] = [];
+    for (let j = 0; j < size; j++) {
+      C[i][j] =
+        A[i + firstMatrixSlice.rows][j + firstMatrixSlice.cols] +
+        B[i + secondMatrixSlice.rows][j + secondMatrixSlice.cols];
+    }
+  }
+  return C;
+}
+
+/**
+ * Immutably subtracts two matrices.
+ *
+ * @param {number[][]} A - first Matrix
+ * @param {number[][]} B - second matrix
+ * @param {?MatrixOperationOptions} firstMatrixSlice - first matrix slice options
+ * @param {?MatrixOperationOptions} secondMatrixSlice - second matrix slice options
+ * @param {?number} size - slice size
+ *
+ * @returns {number[][]} Difference of `A` and `B`.
+ */
+export function subtractMatrices(
+  A: number[][],
+  B: number[][],
+  {
+    firstMatrixSlice = { rows: 0, cols: 0 },
+    secondMatrixSlice = { rows: 0, cols: 0 },
+    size = A.length,
+  } = {} as MatrixOperationOptions,
+): number[][] {
+  const C = [];
+  for (let i = 0; i < size; i++) {
+    C[i] = [];
+    for (let j = 0; j < size; j++) {
+      C[i][j] =
+        A[i + firstMatrixSlice.rows][j + firstMatrixSlice.cols] -
+        B[i + secondMatrixSlice.rows][j + secondMatrixSlice.cols];
+    }
+  }
+  return C;
+}
+
+/**
+ * Combines four matrices in place.
+ *
+ * @param {number[][]} upperLeft - upper left matrix
+ * @param {number[][]} upperRight - upper right matrix
+ * @param {number[][]} lowerLeft - lower left matrix
+ * @param {number[][]} lowerRight - lower right matrix
+ *
+ * @returns {number[][]} Combined matrix of `A`, `B`, `C` and `D`.
+ */
 export function combineFourMatrices(
   upperLeft: number[][],
   upperRight: number[][],
@@ -200,69 +252,4 @@ export function combineFourMatrices(
   }
 
   return upperLeft;
-}
-
-export function addMatricesWithBounds(
-  A: number[][],
-  B: number[][],
-  aRowsAndCols: MatrixRowsAndCols,
-  bRowsAndCols: MatrixRowsAndCols,
-  size: number,
-): number[][] {
-  const C = [];
-
-  for (let i = 0; i < size; i++) {
-    C[i] = [];
-    for (let j = 0; j < size; j++) {
-      C[i][j] =
-        A[i + aRowsAndCols.rows][j + aRowsAndCols.cols] +
-        B[i + bRowsAndCols.rows][j + bRowsAndCols.cols];
-    }
-  }
-  return C;
-}
-
-export function subtractMatricesWithBounds(
-  A: number[][],
-  B: number[][],
-  aRowsAndCols: MatrixRowsAndCols,
-  bRowsAndCols: MatrixRowsAndCols,
-  size: number,
-): number[][] {
-  const C = [];
-  for (let i = 0; i < size; i++) {
-    C[i] = [];
-    for (let j = 0; j < size; j++) {
-      C[i][j] =
-        A[i + aRowsAndCols.rows][j + aRowsAndCols.cols] -
-        B[i + bRowsAndCols.rows][j + bRowsAndCols.cols];
-    }
-  }
-  return C;
-}
-
-export function addMatrices(A: number[][], B: number[][]): number[][] {
-  const length = A.length;
-  const C = [[]];
-
-  for (let i = 0; i < length; i++) {
-    C[i] = [];
-    for (let j = 0; j < length; j++) {
-      C[i][j] = A[i][j] + B[i][j];
-    }
-  }
-  return C;
-}
-
-export function subtractMatrices(A: number[][], B: number[][]): number[][] {
-  const length = A.length;
-  const C = [[]];
-
-  for (let i = 0; i < length; i++) {
-    C[i] = [];
-    for (let j = 0; j < length; j++) {
-      C[i][j] = A[i][j] - B[i][j];
-    }
-  }
-  return C;
 }

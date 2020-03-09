@@ -7,6 +7,6 @@ Find a contiguous subarray with the largest sum
 
 | Algorithm                       | Time complexity |   
 |---------------------------------|-----------------|
-| Naive method                    | O(n^2)          | 
+| Naive                           | O(n^2)          | 
 | Divide and Conquer              | O(nlog(n))      |
 | Kadane                          | O(n)            |
