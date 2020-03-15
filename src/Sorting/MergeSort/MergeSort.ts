@@ -5,7 +5,11 @@
  * @param {number=} startIndex - index from which to start sorting
  * @param {number=} endIndex - index from which to end sorting
  */
-export function mergeSort(array: number[], startIndex = 0, endIndex = array.length - 1) {
+export function mergeSort(
+  array: number[],
+  startIndex = 0,
+  endIndex = array.length - 1,
+) {
   if (startIndex < endIndex) {
     const middleIndex = Math.floor((startIndex + endIndex) / 2);
     mergeSort(array, startIndex, middleIndex);
@@ -35,8 +39,11 @@ function mergeArray(
   let rightSliceIndex = 0;
   let mergedIndex = startIndex;
 
-  while (leftSliceIndex < leftSlice.length && rightSliceIndex < rightSlice.length) {
-    if (leftSlice[leftSliceIndex ] <= rightSlice[rightSliceIndex]) {
+  while (
+    leftSliceIndex < leftSlice.length &&
+    rightSliceIndex < rightSlice.length
+  ) {
+    if (leftSlice[leftSliceIndex] <= rightSlice[rightSliceIndex]) {
       array[mergedIndex] = leftSlice[leftSliceIndex];
       leftSliceIndex++;
     } else {

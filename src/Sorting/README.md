@@ -1,5 +1,5 @@
 | Algorithm                       | Time complexity |               |               | Space complexity |
-|---------------------------------|-----------------|---------------|---------------|------------------|
+| ------------------------------- | --------------- | ------------- | ------------- | ---------------- |
 |                                 | Best            | Average       | Worst         | Worst            |
 | [Quicksort](QuickSort)          | O(nlog(n))      | O(nlog(n))    | O(n²)         | O(log(n))        |
 | [Mergesort](MergeSort)          | O(nlog(n))      | O(nlog(n))    | O(nlog(n))    | O(n)             |

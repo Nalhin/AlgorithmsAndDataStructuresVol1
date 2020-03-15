@@ -1,7 +1,7 @@
 import { maximumSubarrayKadane } from '../MaximumSubarrayKadane';
 
-describe('MaximumSubarray Linear', function() {
-  it('should find maximum subarray', function() {
+describe('MaximumSubarray Linear', () => {
+  it('should find maximum subarray', () => {
     const data = [1, -2, 3, 10, -5, 14];
     const expected = [3, 10, -5, 14];
 

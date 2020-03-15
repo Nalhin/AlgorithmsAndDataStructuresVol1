@@ -4,9 +4,8 @@
 
 Find a contiguous subarray with the largest sum
 
-
-| Algorithm                       | Time complexity |   
-|---------------------------------|-----------------|
-| Naive                           | O(n^2)          | 
-| Divide and Conquer              | O(nlog(n))      |
-| Kadane                          | O(n)            |
+| Algorithm          | Time complexity |
+| ------------------ | --------------- |
+| Naive              | O(n^2)          |
+| Divide and Conquer | O(nlog(n))      |
+| Kadane             | O(n)            |

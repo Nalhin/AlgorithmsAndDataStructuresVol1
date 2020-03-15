@@ -18,7 +18,8 @@ jobs:
       language: python
       python: 3.8
       install:
-        - pip install -r requirements.txt
+        - pip install pipenv
+        - pipenv install --dev
         - pip install codecov
       script:
         - npm run pytest:cov
