@@ -5,8 +5,8 @@
  */
 export function selectionSort(array: number[]) {
   for (let i = 0; i < array.length; i++) {
-    const smallestIndex = findIndexOfSmallestElement(array, i);
-    [array[i], array[smallestIndex]] = [array[smallestIndex], array[i]];
+    const smallest = findIndexOfSmallestElement(array, i);
+    [array[i], array[smallest]] = [array[smallest], array[i]];
   }
 }
 

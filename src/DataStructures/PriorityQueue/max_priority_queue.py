@@ -1,0 +1,2 @@
+class MaxPriorityQueue:
+    pass

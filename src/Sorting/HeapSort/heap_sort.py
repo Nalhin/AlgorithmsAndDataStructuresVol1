@@ -1,15 +1,13 @@
 def heap_sort(array):
     build_max_heap(array)
-    heap_size = len(array) - 1
-    for i in range(len(array) - 1, 1, -1):
+    for i in range(len(array) - 1, -1, -1):
         array[0], array[i] = array[i], array[0]
-        heap_size = heap_size - 1
-        max_heapify(array, i, heap_size)
+        max_heapify(array, 0, i)
 
 
 def build_max_heap(array):
-    for i in range(len(array) // 2, 0, -1):
-        max_heapify(array, i, len(array) - 1)
+    for i in range(len(array) // 2 - 1, -1, -1):
+        max_heapify(array, i, len(array))
 
 
 def max_heapify(array, i, heap_size):
@@ -29,8 +27,8 @@ def max_heapify(array, i, heap_size):
 
 
 def get_left_position(i):
-    return i * 2
+    return i * 2 + 1
 
 
 def get_right_position(i):
-    return i * 2 + 1
+    return i * 2 + 2
