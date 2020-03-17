@@ -10,4 +10,3 @@ class TestRandomizeInPlace:
 
         assert len(result) == len(array)
         assert result.sort() == array.sort()
-
