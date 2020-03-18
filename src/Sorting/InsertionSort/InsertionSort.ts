@@ -1,5 +1,5 @@
 /**
- * Sorts given array in place with insertion sort algorithm.
+ * Sorts a given array in place with insertion sort algorithm.
  *
  * @param {number[]} array
  */

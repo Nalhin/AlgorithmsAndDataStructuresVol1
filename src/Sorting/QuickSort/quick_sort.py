@@ -5,28 +5,27 @@ def quick_sort(array):
     quick_sort_recursive(array, 0, len(array) - 1)
 
 
-def quick_sort_recursive(array, p, r):
-    if p < r:
-        q = random_partition(array, p, r)
-        quick_sort_recursive(array, p, q - 1)
-        quick_sort_recursive(array, q + 1, r)
+def quick_sort_recursive(array, low, high):
+    if low < high:
+        pivot = random_partition(array, low, high)
+        quick_sort_recursive(array, low, pivot - 1)
+        quick_sort_recursive(array, pivot + 1, high)
 
 
-def random_partition(array, p, r):
-    pivot = randint(p, r)
-    array[pivot], array[r] = array[r], array[pivot]
-    return partition(array, p, r)
+def random_partition(array, low, high):
+    pivot = randint(low, high)
+    array[pivot], array[high] = array[high], array[pivot]
+    return partition(array, low, high)
 
 
-def partition(array, p, r):
-    x = array[r]
-    i = p - 1
+def partition(array, low, high):
+    x = array[high]
+    i = low
 
-    for j in range(p, r):
+    for j in range(low, high):
         if array[j] <= x:
-            i += 1
             array[i], array[j] = array[j], array[i]
+            i += 1
 
-    q = i + 1
-    array[q], array[r] = array[r], array[q]
-    return q
+    array[i], array[high] = array[high], array[i]
+    return i

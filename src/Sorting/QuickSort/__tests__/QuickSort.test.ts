@@ -1,11 +1,11 @@
-import { insertionSort } from '../InsertionSort';
+import { quickSort } from '../QuickSort';
 
-describe('Insertion Sort', () => {
+describe('Quick Sort', () => {
   it('should sort an array correctly', () => {
     const initialState = [1, 3, 2, 5, 4, 6, 2, 4, 8];
     const expectedState = [...initialState].sort((a, b) => a - b);
 
-    insertionSort(initialState);
+    quickSort(initialState);
 
     expect(initialState).toEqual(expectedState);
   });
@@ -14,7 +14,7 @@ describe('Insertion Sort', () => {
     const array = [...Array(100)].map(_ => Math.floor(Math.random() * 100));
     const expected = [...array].sort((a, b) => a - b);
 
-    insertionSort(array);
+    quickSort(array);
 
     expect(array).toEqual(expected);
   });

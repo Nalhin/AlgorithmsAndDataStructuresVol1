@@ -40,6 +40,10 @@ class TestMaxPriorityQueue:
         assert priority_queue.extract_max() == maximum
         assert priority_queue.maximum() == second_max
 
+    def test_extract_max_raises_exception(self, priority_queue):
+        with pytest.raises(Exception):
+            assert priority_queue.extract_max()
+
     def test_increase_key(self, priority_queue):
         """Should increase element's key correctly"""
         maximum = 9
@@ -51,3 +55,9 @@ class TestMaxPriorityQueue:
         priority_queue.increase_key(2, 10)
 
         assert priority_queue.extract_max() == maximum
+
+    def test_increase_key_raises_exception(self, priority_queue):
+        priority_queue.insert(1, 3)
+
+        with pytest.raises(Exception):
+            priority_queue.increase_key(2, 1)

@@ -13,7 +13,7 @@ class MinPriorityQueue:
 
     def insert(self, item, key):
         """Insert item with its key into priority queue"""
-        self.heap.append(Node(-inf, item))
+        self.heap.append(Node(inf, item))
         self.decrease_key(len(self.heap) - 1, key)
 
     def minimum(self):

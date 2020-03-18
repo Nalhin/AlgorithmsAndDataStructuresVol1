@@ -1,67 +1,70 @@
 /**
- * Sorts given array in place with merge sort algorithm.
+ * Sorts a given array in place with merge sort algorithm.
  *
  * @param {number[]} array - array to sort
- * @param {number=} startIndex - index from which to start sorting
- * @param {number=} endIndex - index from which to end sorting
  */
-export function mergeSort(
-  array: number[],
-  startIndex = 0,
-  endIndex = array.length - 1,
-) {
-  if (startIndex < endIndex) {
-    const middleIndex = Math.floor((startIndex + endIndex) / 2);
-    mergeSort(array, startIndex, middleIndex);
-    mergeSort(array, middleIndex + 1, endIndex);
-    mergeArray(array, startIndex, middleIndex, endIndex);
+
+export function mergeSort(array) {
+  mergeSortRecursive(array, 0, array.length - 1);
+}
+
+/**
+ * Recursive call to merge sort.
+ *
+ * @param {number[]} array - array to sort
+ * @param low - index of first element
+ * @param high - index of last element
+ */
+function mergeSortRecursive(array: number[], low: number, high: number) {
+  if (low < high) {
+    const middle = Math.floor((low + high) / 2);
+    mergeSortRecursive(array, low, middle);
+    mergeSortRecursive(array, middle + 1, high);
+    mergeArray(array, low, middle, high);
   }
 }
 
 /**
  * Merges two sorted arrays in place
  * @param array - array to merge
- * @param startIndex - index of the first element in sorted left slice
- * @param middleIndex - index of the last element in sorted left slice
- * @param endIndex - index of the last element in sorted right slice
+ * @param low - index of the first element in sorted left slice
+ * @param middle - index of the last element in sorted left slice
+ * @param high - index of the last element in sorted right slice
  */
 function mergeArray(
   array: number[],
-  startIndex: number,
-  middleIndex: number,
-  endIndex: number,
+  low: number,
+  middle: number,
+  high: number,
 ) {
-  // slice not inclusive
-  const leftSlice = array.slice(startIndex, middleIndex + 1);
-  const rightSlice = array.slice(middleIndex + 1, endIndex + 1);
+  // slice it not inclusive
+  const leftSlice = array.slice(low, middle + 1);
+  const rightSlice = array.slice(middle + 1, high + 1);
 
-  let leftSliceIndex = 0;
-  let rightSliceIndex = 0;
-  let mergedIndex = startIndex;
+  let right = 0;
+  let left = 0;
+  let merged = low;
 
-  while (
-    leftSliceIndex < leftSlice.length &&
-    rightSliceIndex < rightSlice.length
-  ) {
-    if (leftSlice[leftSliceIndex] <= rightSlice[rightSliceIndex]) {
-      array[mergedIndex] = leftSlice[leftSliceIndex];
-      leftSliceIndex++;
+  while (left < leftSlice.length && right < rightSlice.length) {
+    if (leftSlice[left] <= rightSlice[right]) {
+      array[merged] = leftSlice[left];
+      left++;
     } else {
-      array[mergedIndex] = rightSlice[rightSliceIndex];
-      rightSliceIndex++;
+      array[merged] = rightSlice[right];
+      right++;
     }
-    mergedIndex++;
+    merged++;
   }
 
-  while (rightSliceIndex < rightSlice.length) {
-    array[mergedIndex] = rightSlice[rightSliceIndex];
-    mergedIndex++;
-    rightSliceIndex++;
+  while (right < rightSlice.length) {
+    array[merged] = rightSlice[right];
+    merged++;
+    right++;
   }
 
-  while (leftSliceIndex < leftSlice.length) {
-    array[mergedIndex] = leftSlice[leftSliceIndex];
-    mergedIndex++;
-    leftSliceIndex++;
+  while (left < leftSlice.length) {
+    array[merged] = leftSlice[left];
+    merged++;
+    left++;
   }
 }
