@@ -1,11 +1,11 @@
-import { quickSort } from '../QuickSort';
+import { quickSortLomuto } from '../QuickSortLomuto';
 
-describe('Quick Sort', () => {
+describe('Quick Sort Lomuto', () => {
   it('should sort an array correctly', () => {
     const initialState = [1, 3, 2, 5, 4, 6, 2, 4, 8];
     const expectedState = [...initialState].sort((a, b) => a - b);
 
-    quickSort(initialState);
+    quickSortLomuto(initialState);
 
     expect(initialState).toEqual(expectedState);
   });
@@ -14,7 +14,7 @@ describe('Quick Sort', () => {
     const array = [...Array(100)].map(_ => Math.floor(Math.random() * 100));
     const expected = [...array].sort((a, b) => a - b);
 
-    quickSort(array);
+    quickSortLomuto(array);
 
     expect(array).toEqual(expected);
   });

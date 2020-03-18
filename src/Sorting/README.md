@@ -9,5 +9,6 @@
 | [Insertion Sort](InsertionSort) | O(n)            | O(n²)         | O(n²)         | O(1)             |
 | [Selection Sort](SelectionSort) | O(n²)           | O(n²)         | O(n²)         | O(1)             |
 | [Shell Sort](ShellSort)         | O(n)            | O((nlog(n))²) | O((nlog(n))²) | O(1)             |
-| [Bucket Sort](Bucket Sort)      | O(n+k)          | O(n+k)        | O(n²)         | O(n)             |
-| [Radix Sort](Radix Sort)        | O(nk)           | O(nk)         | O(nk)         | O(n+k)           |
+| [Bucket Sort](BucketSort)       | O(n+k)          | O(n+k)        | O(n²)         | O(n)             |
+| [Counting Sort](CountingSort)   | O(n+k)          | O(n+k)        | O(n+k)        | O(k)             |
+| [Radix Sort](RadixSort)         | O(nk)           | O(nk)         | O(nk)         | O(n+k)           |

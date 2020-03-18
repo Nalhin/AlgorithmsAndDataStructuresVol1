@@ -1,7 +1,7 @@
 from random import randint
 
 
-def quick_sort(array):
+def quick_sort_lomuto(array):
     quick_sort_recursive(array, 0, len(array) - 1)
 
 
