@@ -1,4 +1,4 @@
-from src.OrderStatistics.RandomizedSelect.randomized_select import randomized_select
+from src.OrderStatistics.KthElement.randomized_select import randomized_select
 
 
 class TestRandomizedSelect:

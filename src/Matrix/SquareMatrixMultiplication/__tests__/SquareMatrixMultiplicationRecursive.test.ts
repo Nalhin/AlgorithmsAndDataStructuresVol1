@@ -57,7 +57,7 @@ describe('SquareMatrixMultiplicationRecursive', () => {
     });
   });
 
-  describe('squareMatrixMultiplicationRecursive', function() {
+  describe('squareMatrixMultiplicationRecursive', function () {
     it('should multiply square matrices correctly', () => {
       const A = [
         [6, -2],

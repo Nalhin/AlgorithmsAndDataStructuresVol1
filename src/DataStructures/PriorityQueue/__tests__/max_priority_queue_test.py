@@ -9,7 +9,6 @@ def priority_queue():
 
 
 class TestMaxPriorityQueue:
-
     def test_insert(self, priority_queue):
         """Should insert elements correctly"""
         item = 5

@@ -20,7 +20,7 @@ describe('Heap Sort', () => {
   });
 
   it('should sort an array with random values correctly', () => {
-    const array = [...Array(100)].map(_ => Math.floor(Math.random() * 100));
+    const array = [...Array(100)].map((_) => Math.floor(Math.random() * 100));
     const expected = [...array].sort((a, b) => a - b);
 
     heapSort(array);
