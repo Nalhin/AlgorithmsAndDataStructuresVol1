@@ -27,7 +27,7 @@ class DoublyLinkedList:
 
         self.head = node
 
-    def push(self, val):
+    def push(self, val) -> None:
         """Adds node with a given value at the end of the list"""
         head = self.head
 
@@ -54,3 +54,4 @@ class DoublyLinkedList:
 
         if node.next:
             node.next.prev = node.prev
+
