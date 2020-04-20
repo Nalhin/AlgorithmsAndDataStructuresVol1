@@ -66,6 +66,14 @@ class TestSinglyLinkedList:
         with pytest.raises(Exception):
             assert singly_linked_list.get_at(0)
 
+    def test_add_first(self, singly_linked_list):
+        item = 2
+        singly_linked_list.add_first(3)
+
+        singly_linked_list.add_first(item)
+
+        assert singly_linked_list.get_first() == item
+
     def test_add_at(self, singly_linked_list):
         item = 2
         singly_linked_list.add_first(3)

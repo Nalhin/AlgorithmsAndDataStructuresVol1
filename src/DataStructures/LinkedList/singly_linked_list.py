@@ -12,9 +12,11 @@ class SinglyLinkedList:
         self.head = None
 
     def is_empty(self) -> bool:
+        """Returns whether the list is empty"""
         return not self.head
 
     def size(self) -> int:
+        """Returns list size"""
         curr_node = self.head
         counter = 0
         while curr_node:
@@ -24,9 +26,11 @@ class SinglyLinkedList:
         return counter
 
     def get_first(self) -> Any:
+        """Returns first element"""
         return self.head.val
 
     def get_at(self, index: int) -> Any:
+        """Returns value of element present at given index"""
         if self.is_empty():
             raise IndexError("List is empty")
 
@@ -42,6 +46,7 @@ class SinglyLinkedList:
         raise IndexError("List index is out of bounds")
 
     def get_last(self) -> Any:
+        """Returns value of last element"""
         if self.is_empty():
             raise IndexError("List is empty")
 
@@ -53,9 +58,11 @@ class SinglyLinkedList:
         return curr_node.val
 
     def add_first(self, item: Any) -> None:
+        """Adds element at start of the list"""
         self.head = Node(item, self.head)
 
     def add_at(self, index: int, item: Any) -> None:
+        """Adds element at given position"""
 
         if not index:
             self.add_first(item)
@@ -74,18 +81,22 @@ class SinglyLinkedList:
         raise IndexError("List index is out of bounds")
 
     def add_last(self, item: Any) -> None:
+        """Appends element at the end of list"""
         curr_node = self.head
+        if not curr_node:
+            self.add_first(item)
 
         while curr_node.next:
             curr_node = curr_node.next
 
         curr_node.next = Node(item, None)
 
-    def index_of(self, item: Any) -> int:
+    def index_of(self, val: Any) -> int:
+        """Returns index of element with given value"""
         curr_node = self.head
         index = 0
         while curr_node:
-            if curr_node.val == item:
+            if curr_node.val == val:
                 return index
             index += 1
             curr_node = curr_node.next
@@ -93,6 +104,7 @@ class SinglyLinkedList:
         return -1
 
     def delete_first(self) -> None:
+        """Removes first element from the list"""
         node = self.head
         if node and node.next:
             node.val = node.next.val
@@ -101,6 +113,7 @@ class SinglyLinkedList:
             self.head = None
 
     def delete_at(self, index: int) -> None:
+        """Removes element present at given position"""
         if not index:
             self.delete_first()
             return
@@ -120,6 +133,7 @@ class SinglyLinkedList:
             curr_node.next = None
 
     def clear(self) -> None:
+        """Removes all elements from the list"""
         curr_node = self.head
 
         while curr_node:
