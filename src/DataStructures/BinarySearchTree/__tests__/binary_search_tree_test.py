@@ -119,3 +119,12 @@ class TestBinarySearchTree:
         result = binary_search_tree.inorder_tree_traversal()
 
         assert result == sorted(values)
+
+    def test_delete(self,binary_search_tree):
+        values = [3, 2, 12, 4, 5, 6, 2]
+        populate_tree(binary_search_tree, values)
+
+        for i in values[3:]:
+            binary_search_tree.delete(i)
+
+        assert binary_search_tree.inorder_tree_traversal() == sorted(values[:-4])
