@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "Algorithms"
+version = "0.1.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest-cov = "^2.9.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.4"
+coverage = "^5.1"
+black = "^19.10b0"
+flake8 = "^3.8.1"
+
+[tool.black]
+line-length = 79
+
+[tool.coverage.run]
+omit = ["**test**","**__init__*"]

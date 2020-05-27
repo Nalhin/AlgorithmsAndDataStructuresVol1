@@ -1,4 +1,6 @@
-from src.Search.BinarySearch.binary_search_iterative import binary_search_iterative
+from src.Search.BinarySearch.binary_search_iterative import (
+    binary_search_iterative,
+)
 
 
 class TestBinarySearchIterative:

@@ -5,9 +5,9 @@
   "scripts": {
     "jest": "jest --watch",
     "jest:cov": "jest --coverage",
-    "format": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|scss|md)\" && pipenv run autopep8 --in-place --recursive .",
-    "pytest": "python -m pytest src",
-    "pytest:cov": "python -m pytest --cov=src --cov-report term"
+    "format": "prettier --write \"src/**/*.+(js|jsx|ts|tsx|json|css|scss|md)\"  && poetry run black src",
+    "pytest": "poetry run python -m pytest src",
+    "pytest:cov": "poetry run python -m pytest --cov=src --cov-report term"
   },
   "dependencies": {
     "@types/jest": "^25.1.2",

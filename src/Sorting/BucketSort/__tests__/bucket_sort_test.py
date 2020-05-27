@@ -4,10 +4,9 @@ from src.Sorting.BucketSort.bucket_sort import bucket_sort
 
 
 class TestBucketSort:
-
     def test_sorts_an_array(self):
         """should sort an array of predefined values"""
-        initial = [.1, .3, .2, .5, .6, .2, .4, .2, .8]
+        initial = [0.1, 0.3, 0.2, 0.5, 0.6, 0.2, 0.4, 0.2, 0.8]
         expected = sorted(initial)
 
         result = bucket_sort(initial)

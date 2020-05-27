@@ -4,7 +4,6 @@ from src.Sorting.HeapSort.heap_sort import heap_sort, build_max_heap
 
 
 class TestHeapSort:
-
     def test_build_max_heap(self):
         """should build max heap correctly"""
         initial = [5, 13, 2, 25, 7, 17, 20, 8, 4]

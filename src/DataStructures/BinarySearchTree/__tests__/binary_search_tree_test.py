@@ -2,7 +2,9 @@ from random import random
 
 import pytest
 
-from src.DataStructures.BinarySearchTree.binary_search_tree import BinarySearchTree
+from src.DataStructures.BinarySearchTree.binary_search_tree import (
+    BinarySearchTree,
+)
 
 
 @pytest.fixture()
@@ -75,7 +77,7 @@ class TestBinarySearchTree:
 
         assert result.val == expected
 
-    def test_tree_predecessor(self,binary_search_tree):
+    def test_tree_predecessor(self, binary_search_tree):
         val = 5
         expected = 4
         values = [3, expected, 2, 12, 6, 2, val]
@@ -120,11 +122,13 @@ class TestBinarySearchTree:
 
         assert result == sorted(values)
 
-    def test_delete(self,binary_search_tree):
+    def test_delete(self, binary_search_tree):
         values = [3, 2, 12, 4, 5, 6, 2]
         populate_tree(binary_search_tree, values)
 
         for i in values[3:]:
             binary_search_tree.delete(i)
 
-        assert binary_search_tree.inorder_tree_traversal() == sorted(values[:-4])
+        assert binary_search_tree.inorder_tree_traversal() == sorted(
+            values[:-4]
+        )

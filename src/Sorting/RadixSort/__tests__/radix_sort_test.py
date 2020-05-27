@@ -4,7 +4,6 @@ from src.Sorting.RadixSort.radix_sort import radix_sort
 
 
 class TestRadixSort:
-
     def test_sorts_an_array(self):
         """should sort an array of predefined values"""
         initial = [1, 3, 2, 5, 6, 2, 4, 2, 8]

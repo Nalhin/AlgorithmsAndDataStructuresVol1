@@ -15,4 +15,4 @@ def maximum_subarray_naive(array):
                 max_end = j
                 max_start = i
 
-    return array[max_start:max_end + 1]
+    return array[max_start : max_end + 1]

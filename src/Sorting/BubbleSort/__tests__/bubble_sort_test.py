@@ -4,7 +4,6 @@ from src.Sorting.BubbleSort.bubble_sort import bubble_sort
 
 
 class TestBubbleSort:
-
     def test_sorts_an_array(self):
         initial = [1, 3, 2, 5, 6, 2, 4, 2, 8]
         expected = sorted(initial)

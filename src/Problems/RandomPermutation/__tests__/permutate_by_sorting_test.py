@@ -1,4 +1,6 @@
-from src.Problems.RandomPermutation.permutate_by_sorting import permutate_by_sorting
+from src.Problems.RandomPermutation.permutate_by_sorting import (
+    permutate_by_sorting,
+)
 
 
 class TestPermutateBySorting:

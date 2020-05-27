@@ -1,8 +1,11 @@
 def min_and_max(array):
     """returns min and max values found in a given array"""
     n = len(array)
-    minimum, maximum, initial = (array[0], array[0], 1) if n % 2 == 1 else (
-        *get_smaller_and_greater(array[0], array[1]), 2)
+    minimum, maximum, initial = (
+        (array[0], array[0], 1)
+        if n % 2 == 1
+        else (*get_smaller_and_greater(array[0], array[1]), 2)
+    )
 
     for i in range(initial, n, 2):
         smaller, greater = get_smaller_and_greater(array[i], array[i + 1])

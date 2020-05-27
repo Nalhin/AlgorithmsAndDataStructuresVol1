@@ -1,4 +1,6 @@
-from src.Problems.MaximumSubarray.maximum_substring_naive import maximum_subarray_naive
+from src.Problems.MaximumSubarray.maximum_substring_naive import (
+    maximum_subarray_naive,
+)
 
 
 class TestMaximumSubarrayNaive:

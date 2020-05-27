@@ -1,4 +1,6 @@
-from src.Search.BinarySearch.binary_search_recursive import binary_search_recursive
+from src.Search.BinarySearch.binary_search_recursive import (
+    binary_search_recursive,
+)
 
 
 class TestBinarySearchRecursive:

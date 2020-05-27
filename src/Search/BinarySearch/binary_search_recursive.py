@@ -13,6 +13,8 @@ def binary_search_recursive(array, searched_value, lower=None, upper=None):
         return middle
 
     if array[middle] > searched_value:
-        return binary_search_recursive(array, searched_value, middle + 1, upper)
+        return binary_search_recursive(
+            array, searched_value, middle + 1, upper
+        )
 
     return binary_search_recursive(array, searched_value, lower, middle - 1)

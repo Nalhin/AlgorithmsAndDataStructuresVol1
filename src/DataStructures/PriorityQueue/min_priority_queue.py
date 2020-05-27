@@ -52,11 +52,17 @@ class MinPriorityQueue:
         if left < heap_size and self.heap[left].key < self.heap[smallest].key:
             smallest = left
 
-        if right < heap_size and self.heap[right].key < self.heap[smallest].key:
+        if (
+            right < heap_size
+            and self.heap[right].key < self.heap[smallest].key
+        ):
             smallest = right
 
         if smallest != i:
-            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]
+            self.heap[i], self.heap[smallest] = (
+                self.heap[smallest],
+                self.heap[i],
+            )
             self._min_heapify(smallest)
 
     @staticmethod

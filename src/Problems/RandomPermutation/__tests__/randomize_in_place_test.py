@@ -1,4 +1,6 @@
-from src.Problems.RandomPermutation.randomize_in_place import randomize_in_place
+from src.Problems.RandomPermutation.randomize_in_place import (
+    randomize_in_place,
+)
 
 
 class TestRandomizeInPlace:

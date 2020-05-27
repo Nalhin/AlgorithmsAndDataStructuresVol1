@@ -1,4 +1,6 @@
-from src.Problems.MaximumSubarray.maximum_subarray_kadane import maximum_subarray_kadane
+from src.Problems.MaximumSubarray.maximum_subarray_kadane import (
+    maximum_subarray_kadane,
+)
 
 
 class TestMaximumSubarrayKadane:

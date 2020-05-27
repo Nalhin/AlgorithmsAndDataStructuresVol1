@@ -1,6 +1,8 @@
 import pytest
 
-from src.DataStructures.PriorityQueue.max_priority_queue import MaxPriorityQueue
+from src.DataStructures.PriorityQueue.max_priority_queue import (
+    MaxPriorityQueue,
+)
 
 
 @pytest.fixture()

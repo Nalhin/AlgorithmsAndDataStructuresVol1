@@ -19,4 +19,4 @@ def maximum_subarray_kadane(array):
             current_start = index + 1
             current_sum = 0
 
-    return array[best_start:best_end + 1]
+    return array[best_start : best_end + 1]
