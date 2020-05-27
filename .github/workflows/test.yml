@@ -40,15 +40,14 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v1
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          path: .venv
+          key: venv-${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install poetry
+          poetry install
       - name: Run Python tests
-        run: python -m pytest --cov=src --cov-report term
+        run: npm run pytest:cov
       - name: Upload coverage
         uses: codecov/codecov-action@v1
         env:
