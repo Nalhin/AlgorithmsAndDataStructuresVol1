@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run TypeScript tests
-        run: npm run jest:cov
+        run: npm run test:cov
       - name: Upload coverage
         uses: codecov/codecov-action@v1
         env:
@@ -47,7 +47,7 @@ jobs:
           pip install poetry
           poetry install
       - name: Run Python tests
-        run: npm run pytest:cov
+        run: make test
       - name: Upload coverage
         uses: codecov/codecov-action@v1
         env:

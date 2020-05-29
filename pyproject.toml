@@ -12,6 +12,7 @@ pytest-cov = "^2.9.0"
 pytest = "^3.4"
 coverage = "^5.1"
 black = "^19.10b0"
+flake8 = "^3.8.2"
 
 [tool.black]
 line-length = 79

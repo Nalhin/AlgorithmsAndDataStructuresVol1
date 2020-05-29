@@ -1,6 +1,10 @@
-[![Test](https://github.com/Nalhin/Algorithms/workflows/Test/badge.svg?branch=master)](https://github.com/Nalhin/Algorithms/actions)
-[![Codecov](https://codecov.io/gh/Nalhin/Algorithms/branch/master/graph/badge.svg)](https://codecov.io/gh/Nalhin/Algorithms)
+[![Test](https://github.com/Nalhin/AlgorithmsAndDataStructures/workflows/Test/badge.svg?branch=master)](https://github.com/Nalhin/AlgorithmsAndDataStructures/actions)
+[![Codecov](https://codecov.io/gh/Nalhin/AlgorithmsAndDataStructures/branch/master/graph/badge.svg)](https://codecov.io/gh/Nalhin/AlgorithmsAndDataStructures)
 
-# Algorithms
+# Algorithms and Data Structures
 
-Algorithm implementation in typescript and python, written with TDD approach.
+Algorithms and Data Structures implemented in Typescript and Python with TDD principles.
+
+Solutions and implementations are based on:
+* Introduction to Algorithms (Third Edition) Thomas H. Cormen
+* GeeksforGeeks
