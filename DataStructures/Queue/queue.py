@@ -6,35 +6,19 @@ class Queue:
         self.data = []
 
     def is_empty(self) -> bool:
-        """Returns whether the queue is empty
-
-        :returns: is queue empty
-        :rtype: bool
-        """
+        """Returns whether the queue is empty"""
         return not len(self.data)
 
     def size(self) -> int:
-        """Returns queue size
-
-        :returns: item
-        :rtype: int
-        """
+        """Returns queue size"""
         return len(self.data)
 
     def enqueue(self, item) -> None:
-        """Adds item to the queue
-
-        :returns: none
-        :rtype: None
-        """
+        """Adds item to the queue"""
         self.data.insert(0, item)
 
     def dequeue(self) -> Any:
-        """Removes and returns last item from the queue
-
-        :returns: last item
-        :rtype: Any
-        """
+        """Removes and returns last item from the queue"""
         if self.is_empty():
             raise Exception("Queue is empty")
 
