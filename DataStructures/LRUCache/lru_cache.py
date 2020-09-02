@@ -6,10 +6,10 @@ class LRUCache:
         self.capacity = capacity
         self.cache = OrderedDict()
 
-    def get(self, key: int) -> int:
+    def get(self, key: int) -> int or None:
         """Returns the value associated with a given key"""
         if key not in self.cache:
-            return -1
+            return None
         self.cache.move_to_end(key)
         return self.cache[key]
 

@@ -19,7 +19,7 @@ class TestLRUCache:
         assert val == result
 
     def test_operation_chain(self, lru_cache):
-        expected = [1, -1, -1, 3, 4]
+        expected = [1, None, None, 3, 4]
         result = []
 
         lru_cache.put(1, 1)
@@ -35,7 +35,7 @@ class TestLRUCache:
         assert expected == result
 
     def test_operation_chain_with_put_removal(self, lru_cache):
-        expected = [-1, -1, 2, 6]
+        expected = [None, None, 2, 6]
         result = []
 
         result.append(lru_cache.get(2))

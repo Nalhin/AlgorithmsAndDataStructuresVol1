@@ -20,7 +20,7 @@ describe('LRUCache', () => {
   });
 
   it('should correctly execute operations in the following order', () => {
-    const expected = [-1, -1, 2, 6];
+    const expected = [null, null, 2, 6];
     const result = [];
 
     result.push(lruCache.get(2));

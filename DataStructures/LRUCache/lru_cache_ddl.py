@@ -1,5 +1,5 @@
 class Node:
-    def __init__(self, val: int, key: int, prev=None, next=None):
+    def __init__(self, val: int or None, key: int, prev=None, next=None):
         self.val = val
         self.prev = prev
         self.next = next
@@ -10,14 +10,14 @@ class LRUCacheDDL:
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.cache = {}
-        self.head = Node(-1, -1)
-        self.tail = Node(-1, -1, prev=self.head)
+        self.head = Node(None, -1)
+        self.tail = Node(None, -1, prev=self.head)
         self.head.next = self.tail
 
-    def get(self, key: int) -> int:
+    def get(self, key: int) -> int or None:
         """Returns the value associated with a given key"""
         if key not in self.cache:
-            return -1
+            return None
         node = self.cache[key]
         self._move_to_tail(node)
         return node.val

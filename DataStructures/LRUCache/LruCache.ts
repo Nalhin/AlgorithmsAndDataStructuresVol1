@@ -8,7 +8,7 @@ export class LRUChache {
 
   public get(key: number): number {
     if (!this.cache.has(key)) {
-      return -1;
+      return null;
     }
 
     const val = this.cache.get(key);
