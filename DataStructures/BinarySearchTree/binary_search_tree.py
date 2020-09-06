@@ -31,7 +31,7 @@ class BinarySearchTree:
         self._recursive_tree_traversal(node.right, items)
 
     def search(self, val):
-        """returns first occupancy of node with given value """
+        """returns the first occurrence of a node with a given value """
         node = self.root
         while node and not node.val == val:
             if node.val < val:
@@ -47,19 +47,19 @@ class BinarySearchTree:
 
     @staticmethod
     def _tree_minimum(node):
-        """finds node with the lowest value present in the tree"""
+        """finds a node with the lowest value present in the tree"""
         while node.left:
             node = node.left
         return node
 
     def maximum(self):
-        """returns largest value present in the tree"""
+        """returns the largest value present in the tree"""
         node = self.root
         return self._tree_maximum(node).val
 
     @staticmethod
     def _tree_maximum(node):
-        """finds node with the largest value present in the tree"""
+        """finds a node with the largest value present in the tree"""
         while node.right:
             node = node.right
         return node
@@ -89,7 +89,7 @@ class BinarySearchTree:
         return parent
 
     def insert(self, val):
-        """inserts value into the tree"""
+        """inserts a value into the tree"""
         node = self.root
 
         if not node:
@@ -111,11 +111,11 @@ class BinarySearchTree:
             parent.right = inserted
 
     def delete(self, val):
-        """removes first occurrence of given value from the tree"""
+        """removes the first occurrence of given value in the tree"""
         return self._delete_node(self.search(val))
 
     def _delete_node(self, node):
-        """removes node from the tree"""
+        """removes a node from the tree"""
         if not node.left:
             self._replace(node, node.right)
             return
@@ -134,14 +134,14 @@ class BinarySearchTree:
         successor.left = node.left
         successor.left.parent = node
 
-    def _replace(self, to_replace, replacing):
-        """replaces node in the tree with given one"""
-        if not to_replace.parent:
-            self.root = replacing
-        elif to_replace == to_replace.parent.left:
-            to_replace.parent.left = replacing
+    def _replace(self, u, v):
+        """replaces node in the tree with the given one"""
+        if not u.parent:
+            self.root = v
+        elif u == u.parent.left:
+            u.parent.left = v
         else:
-            to_replace.parent.right = replacing
+            u.parent.right = v
 
-        if replacing:
-            replacing.parent = to_replace.parent
+        if v:
+            v.parent = u.parent

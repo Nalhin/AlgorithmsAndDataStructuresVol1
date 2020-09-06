@@ -24,12 +24,14 @@ class SkipList:
         self.level = 0
 
     def get_random_level(self) -> int:
+        """generates random level (depth) for a node"""
         lvl = 0
         while lvl < self.max_level and random() < self.prob:
             lvl += 1
         return lvl
 
     def search(self, val: int) -> Optional[int]:
+        """returns the first occurrence of a given value, or None if it's not present"""
         curr = self.head
         for level in range(self.level, -1, -1):
             while curr.next[level] is not None and curr.next[level].val < val:
@@ -41,6 +43,7 @@ class SkipList:
             return None
 
     def _gen_updates(self, curr: Node, val: int) -> [List[Optional[Node]], Node]:
+        """generates a list of nodes to be updated and moves the pointer up the list"""
         update_cache = [None] * self.max_level
         for level in range(self.level, -1, -1):
             while curr.next[level] is not None and curr.next[level].val < val:
@@ -49,6 +52,7 @@ class SkipList:
         return update_cache, curr
 
     def insert(self, val: int) -> None:
+        """inserts a value into the skip list"""
         curr = self.head
         update_cache, curr = self._gen_updates(curr, val)
         curr = curr.next[0]
@@ -65,6 +69,7 @@ class SkipList:
                 update_cache[lvl].next[lvl] = node
 
     def remove(self, val: int) -> None:
+        """remove the node with a given value"""
         curr = self.head
         update_cache, curr = self._gen_updates(curr, val)
         curr = curr.next[0]
